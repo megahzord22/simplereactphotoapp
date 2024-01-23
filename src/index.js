@@ -1,41 +1,60 @@
 import './index.css'
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
 // main app
 function App() {
+    const [renderDialog, setRender] = useState(false)
+    const clickButton = () => {
+        setRender(true)
+    }
+    const closeDialog = () => {
+        setRender(false)
+    }
     return (
         <div className="app">
-            <div className="column"></div>
-            <div className="column"></div>
+            <div className="column">
+            const appButton = <button onClick={clickButton}>Open photo entry dialog</button>
+            {renderDialog && <Dialog onClose={closeDialog}></Dialog>}
+            </div>
+            <div className="column">
+                <Card>
+                    <Image></Image>
+                </Card>
+            </div>
         </div>
     )
 }
-// button
-const AppButton = <button>Generate Images</button>
-// dialogue box
-const Dialogue = <form>
-    <input></input>
-    <input></input>
+// dialog box
+function Dialog(props) {
+    return <form>
+        <label>
+            Photo:
+            <input type="text" placeholder="Photo URL"/>
+        </label>
+        <label>
+            Description:
+            <input type="text" placeholder="Enter description"/>
+        </label>
+        <button onClick={props.onClose}>Cancel</button>
+        <button>Submit</button>
     </form>
-function showDialogue(Dialogue) {
-    if (Dialogue) {
-        return Dialogue
-    } else {
-        return null
-    }
 }
+
 // card
 function Card(props) {
     return <div className="card">
         {props.children}
-       // <img></img>
-       // <p></p>
-       // <button>X</button>
+        <button>X</button>
     </div>
+}
+
+// image 
+function Image(props) {
+    return <div className="image">{props.children}</div>
 }
 const imageList = []
 
 // root stuff 
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(AppButton)
+root.render(App)
