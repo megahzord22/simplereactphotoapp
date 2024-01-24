@@ -8,6 +8,9 @@ function App() {
     const [photoContent, setContent] = useState({})
     const [imageList, setList] = useState([])
     const [keyNumber, setNumber] = useState(1)
+    const deleteImage = (number) => {
+        setList((prevList) => prevList.filter((image) => image.number !== number))
+    }
     const clickButton = () => {
         setRender(true)
     }
@@ -29,7 +32,7 @@ function App() {
             </div>
             <div className="column">
                 {imageList.slice().reverse().map((image) => (
-                <Card key={image.number} photoContent={image}>
+                <Card key={image.number} photoContent={image} onDelete={deleteImage}>
                     <img src={image.photo}></img>
                     <p>{image.description}</p>
                 </Card>))}
