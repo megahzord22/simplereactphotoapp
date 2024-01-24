@@ -72,9 +72,12 @@ function Dialog(props) {
 
 // card
 function Card(props) {
+    const handleX = () => {
+        props.onDelete(props.photoContent.number)
+    }
     return <div className="card">
         {props.children}
-        <button>X</button>
+        <button onClick={handleX}>X</button>
     </div>
 }
 
