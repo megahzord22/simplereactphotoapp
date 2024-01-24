@@ -7,6 +7,7 @@ function App() {
     const [renderDialog, setRender] = useState(false)
     const [photoContent, setContent] = useState({})
     const [imageList, setList] = useState([])
+    const [keyNumber, setNumber] = useState(1)
     const clickButton = () => {
         setRender(true)
     }
@@ -14,10 +15,10 @@ function App() {
         setRender(false)
     }
     const submit = (photo, description) => {
-       // const obj = {photo}, {description}
-       const newImage = {photo, description}
+       const newImage = {photo, description, number: keyNumber}
         setContent( { newImage })
         setList((previous) => [...previous, newImage])
+        setNumber((prevNumber) => prevNumber + 1)
     }
     const appButton = <button onClick={clickButton}>Open photo entry dialog</button>
     return (
@@ -27,8 +28,10 @@ function App() {
             {renderDialog && <Dialog onClose={closeDialog}onSubmit={submit}></Dialog>}
             </div>
             <div className="column">
-                {imageList.map((image, number) => (
-                <Card key={number} photoContent={image}>
+                {imageList.map((image) => (
+                <Card key={image.number} photoContent={image}>
+                    <img src={image.photo}></img>
+                    <p>{image.description}</p>
                 </Card>))}
             </div>
         </div>
@@ -51,12 +54,12 @@ function Dialog(props) {
     }
     return <form className="dialog" onSubmit={handleSubmit}>
         <label>
-            Photo:
+            Photo: 
             <input type="text" placeholder="Photo URL" value={photo} onChange={savePhoto} required/>
         </label>
         <br></br>
         <label>
-            Description:
+            Description: 
             <input type="text" placeholder="Enter description" value={description} onChange={saveDescription} required/>
         </label>
         <br></br>
