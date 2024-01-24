@@ -5,39 +5,51 @@ import ReactDOM from 'react-dom/client'
 // main app
 function App() {
     const [renderDialog, setRender] = useState(false)
+    const [photoContent, setContent] = useState({ photo: '', description: '' })
     const clickButton = () => {
         setRender(true)
     }
     const closeDialog = () => {
         setRender(false)
     }
+    const submit = (photo, description) => {
+        setContent( { photo, description })
+    }
+    const appButton = <button onClick={clickButton}>Open photo entry dialog</button>
     return (
         <div className="app">
             <div className="column">
-            const appButton = <button onClick={clickButton}>Open photo entry dialog</button>
-            {renderDialog && <Dialog onClose={closeDialog}></Dialog>}
+            {appButton}
+            {renderDialog && <Dialog onClose={closeDialog}onSubmit={submit}></Dialog>}
             </div>
             <div className="column">
                 <Card>
-                    <Image></Image>
+                    photoContent={photoContent}
                 </Card>
             </div>
         </div>
     )
 }
+
 // dialog box
 function Dialog(props) {
-    return <form>
+    const [photo, setPhoto] = useState('')
+    const [description, setDescribe] = useState('')
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        props.onSubmit(photo, description)
+    }
+    return <form className="dialog" onSubmit={handleSubmit}>
         <label>
             Photo:
-            <input type="text" placeholder="Photo URL"/>
+            <input type="text" placeholder="Photo URL" value={photo} required/>
         </label>
         <label>
             Description:
-            <input type="text" placeholder="Enter description"/>
+            <input type="text" placeholder="Enter description" value={description} required/>
         </label>
         <button onClick={props.onClose}>Cancel</button>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
     </form>
 }
 
@@ -49,12 +61,9 @@ function Card(props) {
     </div>
 }
 
-// image 
-function Image(props) {
-    return <div className="image">{props.children}</div>
-}
 const imageList = []
 
-// root stuff 
+// root stuff
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(App)
+root.render(<App />)
+

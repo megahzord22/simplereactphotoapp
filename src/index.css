@@ -10,3 +10,9 @@
 .column {
     flex: 1;
 }
+
+.dialog {
+    border: 2px solid gray;
+    background-color: lightblue;
+    padding: 10px;
+}
