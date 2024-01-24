@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client'
 // main app
 function App() {
     const [renderDialog, setRender] = useState(false)
-    const [photoContent, setContent] = useState({ photo: '', description: '' })
+    const [photoContent, setContent] = useState({})
     const clickButton = () => {
         setRender(true)
     }
@@ -13,6 +13,7 @@ function App() {
         setRender(false)
     }
     const submit = (photo, description) => {
+       // const obj = {photo}, {description}
         setContent( { photo, description })
     }
     const appButton = <button onClick={clickButton}>Open photo entry dialog</button>
@@ -23,8 +24,7 @@ function App() {
             {renderDialog && <Dialog onClose={closeDialog}onSubmit={submit}></Dialog>}
             </div>
             <div className="column">
-                <Card>
-                    photoContent={photoContent}
+                <Card photoContent={photoContent}>
                 </Card>
             </div>
         </div>
