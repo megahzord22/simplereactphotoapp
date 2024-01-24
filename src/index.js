@@ -43,15 +43,23 @@ function Dialog(props) {
         e.preventDefault()
         props.onSubmit(photo, description)
     }
+    function savePhoto(event) {
+        setPhoto(event.target.value)
+    }
+    function saveDescription(event) {
+        setDescribe(event.target.value)
+    }
     return <form className="dialog" onSubmit={handleSubmit}>
         <label>
             Photo:
-            <input type="text" placeholder="Photo URL" value={photo} required/>
+            <input type="text" placeholder="Photo URL" value={photo} onChange={savePhoto} required/>
         </label>
+        <br></br>
         <label>
             Description:
-            <input type="text" placeholder="Enter description" value={description} required/>
+            <input type="text" placeholder="Enter description" value={description} onChange={saveDescription} required/>
         </label>
+        <br></br>
         <button onClick={props.onClose}>Cancel</button>
         <button type="submit">Submit</button>
     </form>
