@@ -28,7 +28,7 @@ function App() {
             {renderDialog && <Dialog onClose={closeDialog}onSubmit={submit}></Dialog>}
             </div>
             <div className="column">
-                {imageList.map((image) => (
+                {imageList.slice().reverse().map((image) => (
                 <Card key={image.number} photoContent={image}>
                     <img src={image.photo}></img>
                     <p>{image.description}</p>
@@ -58,10 +58,12 @@ function Dialog(props) {
             <input type="text" placeholder="Photo URL" value={photo} onChange={savePhoto} required/>
         </label>
         <br></br>
+        <br></br>
         <label>
             Description: 
             <input type="text" placeholder="Enter description" value={description} onChange={saveDescription} required/>
         </label>
+        <br></br>
         <br></br>
         <button onClick={props.onClose}>Cancel</button>
         <button type="submit">Submit</button>
