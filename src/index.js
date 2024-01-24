@@ -22,6 +22,7 @@ function App() {
         setContent( { newImage })
         setList((previous) => [...previous, newImage])
         setNumber((prevNumber) => prevNumber + 1)
+        setRender(false)
     }
     const appButton = <button onClick={clickButton}>Open photo entry dialog</button>
     return (
