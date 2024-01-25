@@ -74,8 +74,9 @@ function Dialog(props) {
         <br></br>
         <br></br>
         {warning && <p className="newWarning">You need to include a URL and description.</p>}
-        <button onClick={props.onClose}>Cancel</button>
         <button type="submit">Accept</button>
+        <button onClick={props.onClose}>Cancel</button>
+        
     </form>
 }
 
@@ -89,8 +90,6 @@ function Card(props) {
         <button onClick={handleX}>X</button>
     </div>
 }
-
-const imageList = []
 
 // root stuff
 const root = ReactDOM.createRoot(document.getElementById("root"))
