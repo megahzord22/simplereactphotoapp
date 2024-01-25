@@ -75,7 +75,7 @@ function Dialog(props) {
         <br></br>
         {warning && <p className="newWarning">You need to include a URL and description.</p>}
         <button onClick={props.onClose}>Cancel</button>
-        <button type="submit">Submit</button>
+        <button type="submit">Accept</button>
     </form>
 }
 
