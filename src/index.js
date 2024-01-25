@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom/client'
 // main app
 function App() {
     const [renderDialog, setRender] = useState(false)
-    const [photoContent, setContent] = useState({})
     const [imageList, setList] = useState([])
     const [keyNumber, setNumber] = useState(1)
     const deleteImage = (number) => {
@@ -19,7 +18,6 @@ function App() {
     }
     const submit = (photo, description) => {
        const newImage = {photo, description, number: keyNumber}
-        setContent( { newImage })
         setList((previous) => [...previous, newImage])
         setNumber((prevNumber) => prevNumber + 1)
         setRender(false)
