@@ -21,3 +21,7 @@
     width: 300px;
     margin: 10px;
 }
+
+.newWarning {
+    color: red;
+}

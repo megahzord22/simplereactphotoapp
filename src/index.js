@@ -46,9 +46,15 @@ function App() {
 function Dialog(props) {
     const [photo, setPhoto] = useState('')
     const [description, setDescribe] = useState('')
+    const [warning, setWarning] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault()
-        props.onSubmit(photo, description)
+        if (photo !== '' && description !== '') {
+            props.onSubmit(photo, description)
+            setWarning(false) }
+        else { 
+            setWarning(true)
+        }
     }
     function savePhoto(event) {
         setPhoto(event.target.value)
@@ -59,16 +65,17 @@ function Dialog(props) {
     return <form className="dialog" onSubmit={handleSubmit}>
         <label>
             Photo: 
-            <input type="text" placeholder="Photo URL" value={photo} onChange={savePhoto} required/>
+            <input type="text" placeholder="Photo URL" value={photo} onChange={savePhoto}/>
         </label>
         <br></br>
         <br></br>
         <label>
             Description: 
-            <input type="text" placeholder="Enter description" value={description} onChange={saveDescription} required/>
+            <input type="text" placeholder="Enter description" value={description} onChange={saveDescription}/>
         </label>
         <br></br>
         <br></br>
+        {warning && <p className="newWarning">You need to include a URL and description.</p>}
         <button onClick={props.onClose}>Cancel</button>
         <button type="submit">Submit</button>
     </form>
